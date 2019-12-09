@@ -11,7 +11,7 @@
   }
 
   var newcontent_underscord = function(id) {
-    return '_' + id + '_$1';
+    return '' + id + '$1';
   }
 
   var getInsertionNodeElem = function(insertionNode, insertionTraversal, $this){
@@ -40,7 +40,7 @@
   $(document).on('click', '.add_fields', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    
+
     var $this                 = $(this),
         assoc                 = $this.data('association'),
         assocs                = $this.data('associations'),
@@ -50,7 +50,7 @@
         insertionTraversal    = $this.data('association-insertion-traversal'),
         count                 = parseInt($this.data('count'), 10),
         regexp_braced         = new RegExp('\\[new_' + assoc + '\\](.*?\\s)', 'g'),
-        regexp_underscord     = new RegExp('_new_' + assoc + '_(\\w*)', 'g'),
+        regexp_underscord     = new RegExp('new_' + assoc + '(\\w*)', 'g'),
         new_id                = create_new_id(),
         new_content           = content.replace(regexp_braced, newcontent_braced(new_id)),
         new_contents          = [],
@@ -59,7 +59,7 @@
 
     if (new_content == content) {
       regexp_braced     = new RegExp('\\[new_' + assocs + '\\](.*?\\s)', 'g');
-      regexp_underscord = new RegExp('_new_' + assocs + '_(\\w*)', 'g');
+      regexp_underscord = new RegExp('new_' + assocs + '(\\w*)', 'g');
       new_content       = content.replace(regexp_braced, newcontent_braced(new_id));
     }
 
